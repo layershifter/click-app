@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
 /**
+ * @method int increment(string $column, int $amount = 1, array $extra = [])
  * @method static Click firstOrCreate(array $fields, array $values = [])
  */
 final class Click extends Model

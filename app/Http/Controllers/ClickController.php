@@ -17,20 +17,9 @@ final class ClickController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
      * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function store(Request $request)
     {
@@ -46,52 +35,33 @@ final class ClickController extends Controller
             'param1' => $request->get('param1'),
         ], ['param2' => $request->get('param2')]);
 
-        return $click;
+        if ($click->wasRecentlyCreated) {
+            return redirect()->action('ClickController@success', compact('click'));
+        }
+
+        $click->increment('error');
+
+        return redirect()->action('ClickController@error', compact('click'));
     }
 
     /**
-     * Display the specified resource.
+     * @param Click $click
      *
-     * @param \App\Click $click
-     *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function show(Click $click)
+    public function error(Click $click)
     {
+        return view('click.error', compact('click'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @param Click $click
      *
-     * @param \App\Click $click
-     *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function edit(Click $click)
+    public function success(Click $click)
     {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Click               $click
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Click $click)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Click $click
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Click $click)
-    {
+        return view('click.success', compact('click'));
     }
 
     /**
