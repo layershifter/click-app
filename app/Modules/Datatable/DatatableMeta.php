@@ -19,11 +19,14 @@ final class DatatableMeta implements Arrayable
 
     /**
      * DatatableMeta constructor.
+     *
+     * @param Collection $collection
+     * @param Request    $request
      */
-    public function __construct(Request $request, Collection $collection)
+    public function __construct(Collection $collection, Request $request)
     {
-        $this->request = $request;
         $this->collection = $collection;
+        $this->request = $request;
     }
 
     /**
@@ -33,16 +36,18 @@ final class DatatableMeta implements Arrayable
     {
         return [
             'draw'            => $this->request->get('draw'),
-            'recordsFiltered' => $this->model()::count(),
+            'recordsFiltered' => $this->filtered(),
             'recordsTotal'    => $this->collection->count(),
         ];
     }
 
     /**
-     * @return string
+     * @return int
      */
-    private function model(): string
+    private function filtered(): int
     {
-        return $this->collection->getQueueableClass();
+        $model = $this->collection->getQueueableClass();
+
+        return $model ? $model::count() : 0;
     }
 }

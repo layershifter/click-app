@@ -10,16 +10,14 @@ use League\Fractal\TransformerAbstract;
 final class Datatable
 {
     /**
-     * @var string
-     */
-    private $model;
-    /**
      * @var Request
      */
     private $request;
 
     /**
      * Datatable constructor.
+     *
+     * @param Request $request
      */
     public function __construct(Request $request)
     {
@@ -35,12 +33,21 @@ final class Datatable
      */
     public function response(string $model, TransformerAbstract $transformer): array
     {
-        $collection = $model::all();
-
+        $collection = $this->fetch($model);
         $resource = new DatatableCollection($collection, $transformer);
         $resource->setMeta($this->meta($collection));
 
         return $this->fractal->createData($resource)->toArray();
+    }
+
+    /**
+     * @param string $model
+     *
+     * @return Collection
+     */
+    private function fetch(string $model): Collection
+    {
+        return (new DatabaseQueryBuilder($model, $this->request))->build()->get();
     }
 
     /**
@@ -50,6 +57,6 @@ final class Datatable
      */
     private function meta(Collection $collection): array
     {
-        return (new DatatableMeta($this->request, $collection))->toArray();
+        return (new DatatableMeta($collection, $this->request))->toArray();
     }
 }

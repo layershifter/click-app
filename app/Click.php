@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Modules\Datatable\Contracts\DatatableModelContract;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
@@ -9,7 +10,7 @@ use Ramsey\Uuid\Uuid;
  * @method int increment(string $column, int $amount = 1, array $extra = [])
  * @method static Click firstOrCreate(array $fields, array $values = [])
  */
-final class Click extends Model
+final class Click extends Model implements DatatableModelContract
 {
     /**
      * {@inheritdoc}
@@ -34,6 +35,11 @@ final class Click extends Model
      * {@inheritdoc}
      */
     protected $table = 'click';
+
+    public function searchable(): array
+    {
+        return ['id', 'ip', 'param1', 'param2', 'ref', 'ua'];
+    }
 
     /**
      * {@inheritdoc}
