@@ -9,5 +9,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
+.php_cs.cache
 _ide_helper.php
 composer.phar

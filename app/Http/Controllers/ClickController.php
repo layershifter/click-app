@@ -14,7 +14,6 @@ final class ClickController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -24,7 +23,6 @@ final class ClickController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -54,50 +52,46 @@ final class ClickController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Click $click
+     * @param \App\Click $click
      *
      * @return \Illuminate\Http\Response
      */
     public function show(Click $click)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Click $click
+     * @param \App\Click $click
      *
      * @return \Illuminate\Http\Response
      */
     public function edit(Click $click)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Click               $click
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Click               $click
      *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Click $click)
     {
-        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Click $click
+     * @param \App\Click $click
      *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Click $click)
     {
-        //
     }
 
     /**
