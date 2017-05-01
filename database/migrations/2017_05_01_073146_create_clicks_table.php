@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateClicksTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('click', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->primary('id');
+
+            $table->string('ua', 512)->index();
+            $table->string('ip', 15)->index();
+            $table->string('ref', 512)->index();
+            $table->string('param1')->index();
+            $table->string('param2');
+            $table->unsignedInteger('error')->default(0);
+            $table->unsignedInteger('bad_domain')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('click');
+    }
+}
