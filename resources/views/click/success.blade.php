@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.message')
 
 @section('content')
     <div class="ui success message">

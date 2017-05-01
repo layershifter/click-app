@@ -7,14 +7,13 @@
     <title>Click</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css"/>
+
+    @if($click->bad_domain)
+        <meta http-equiv="refresh" content="5;https://google.com/">
+    @endif
 </head>
 <body>
 <div class="ui container">
-    <div class="ui fluid inverted menu">
-        <a class="item" href="{{ action('ClickController@index') }}">Клики</a>
-        <a class="item" href="{{ action('BadDomainController@index') }}">Домены</a>
-    </div>
-
     @yield('content')
 </div>
 </body>

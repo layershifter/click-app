@@ -20,7 +20,7 @@ final class ClickDatatableTransformer extends TransformerAbstract
             $click->ref,
             $click->param1,
             $click->param2,
-            $click->errors,
+            $click->error,
             $click->bad_domain,
         ];
     }

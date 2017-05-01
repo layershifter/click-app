@@ -14,10 +14,12 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Click::class, function (Faker\Generator $faker) {
     return [
-        'ip'     => $faker->ipv4,
-        'param1' => $faker->word,
-        'param2' => $faker->word,
-        'ref'    => $faker->url,
-        'ua'     => $faker->userAgent,
+        'bad_domain' => $faker->randomElement([0, 1]),
+        'error'      => $faker->randomDigit,
+        'ip'         => $faker->ipv4,
+        'param1'     => $faker->word,
+        'param2'     => $faker->word,
+        'ref'        => $faker->url,
+        'ua'         => $faker->userAgent,
     ];
 });

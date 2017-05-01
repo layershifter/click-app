@@ -22,7 +22,7 @@ final class ClickDatatableTransformerTest extends TestCase
             $click->ref,
             $click->param1,
             $click->param2,
-            $click->errors,
+            $click->error,
             $click->bad_domain,
         ], $transformer->transform($click));
     }

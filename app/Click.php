@@ -8,8 +8,8 @@ use Ramsey\Uuid\Uuid;
 
 /**
  * @property string $id
- * @property mixed  $bad_domain
- * @property int    $errors
+ * @property int    $bad_domain
+ * @property int    $error
  * @property string $param1
  * @property string $param2
  * @property string $ref
@@ -33,12 +33,13 @@ final class Click extends Model implements DatatableModelContract
      * {@inheritdoc}
      */
     protected $casts = [
-        'error' => 'int',
+        'bad_domain' => 'int',
+        'error'      => 'int',
     ];
     /**
      * {@inheritdoc}
      */
-    protected $fillable = ['ip', 'param1', 'param2', 'ref', 'ua'];
+    protected $fillable = ['bad_domain', 'ip', 'param1', 'param2', 'ref', 'ua'];
     /**
      * {@inheritdoc}
      */

@@ -86,7 +86,7 @@ final class DatabaseQueryBuilder
      */
     private function limit(): int
     {
-        return (int)$this->request->get('length', 10);
+        return (int) $this->request->get('length', 10);
     }
 
     /**
@@ -94,7 +94,7 @@ final class DatabaseQueryBuilder
      */
     private function offset(): int
     {
-        return (int)$this->request->get('start', 0);
+        return (int) $this->request->get('start', 0);
     }
 
     /**

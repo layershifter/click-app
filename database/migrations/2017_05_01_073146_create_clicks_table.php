@@ -16,13 +16,13 @@ class CreateClicksTable extends Migration
             $table->uuid('id');
             $table->primary('id');
 
-            $table->string('ua', 512)->index();
+            $table->string('ua', 512)->index()->nullable();
             $table->string('ip', 15)->index();
-            $table->string('ref', 512)->index();
+            $table->string('ref', 512)->index()->nullable();
             $table->string('param1')->index();
             $table->string('param2');
             $table->unsignedInteger('error')->default(0);
-            $table->unsignedInteger('bad_domain')->nullable();
+            $table->unsignedTinyInteger('bad_domain')->default(0);
         });
     }
 

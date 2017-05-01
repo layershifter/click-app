@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\HandleClick;
 use App\Click;
 use App\Modules\Datatable\Datatable;
 use App\Transformers\ClickDatatableTransformer;
@@ -56,18 +57,12 @@ final class ClickController extends BaseController
             'param2' => 'required',
         ]);
 
-        $click = Click::firstOrCreate([
-            'ua'     => $request->headers->get('user-agent', ''),
-            'ip'     => $request->ip(),
-            'ref'    => $request->headers->get('referrer', ''),
-            'param1' => $request->get('param1'),
-        ], ['param2' => $request->get('param2')]);
+        $handler = new HandleClick($request);
+        $click = $handler->click();
 
-        if ($click->wasRecentlyCreated) {
+        if ($handler->success()) {
             return redirect()->action('ClickController@success', compact('click'));
         }
-
-        $click->increment('error');
 
         return redirect()->action('ClickController@error', compact('click'));
     }
