@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\BadDomain;
 use Illuminate\Http\Request;
 
-class BadDomainController extends Controller
+final class BadDomainController extends BaseController
 {
     /**
      * Display a listing of the resource.

@@ -173,7 +173,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Modules\Datatable\DatatableProvider::class,
     ],
 
     /*

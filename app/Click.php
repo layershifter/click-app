@@ -23,6 +23,12 @@ final class Click extends Model
     /**
      * {@inheritdoc}
      */
+    protected $casts = [
+        'error' => 'int',
+    ];
+    /**
+     * {@inheritdoc}
+     */
     protected $fillable = ['ip', 'param1', 'param2', 'ref', 'ua'];
     /**
      * {@inheritdoc}

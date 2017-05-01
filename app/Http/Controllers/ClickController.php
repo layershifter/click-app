@@ -3,45 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Click;
+use App\Modules\Datatable\Datatable;
+use App\Transformers\ClickDatatableTransformer;
 use Illuminate\Http\Request;
 
-final class ClickController extends Controller
+final class ClickController extends BaseController
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    }
-
-    /**
-     * @param Request $request
+     * @param Datatable $datatable
+     * @param Request   $request
      *
      * @return mixed
      */
-    public function store(Request $request)
+    public function index(Datatable $datatable, Request $request)
     {
-        $this->validate($request, [
-            'param1' => 'required',
-            'param2' => 'required',
-        ]);
-
-        $click = Click::firstOrCreate([
-            'ua'     => $request->server('HTTP_USER_AGENT', ''),
-            'ip'     => $request->ip(),
-            'ref'    => $request->server('HTTP_REFERER', ''),
-            'param1' => $request->get('param1'),
-        ], ['param2' => $request->get('param2')]);
-
-        if ($click->wasRecentlyCreated) {
-            return redirect()->action('ClickController@success', compact('click'));
+        if (!$request->ajax()) {
+            return view('click.index');
         }
 
-        $click->increment('error');
-
-        return redirect()->action('ClickController@error', compact('click'));
+        return $datatable->response(Click::class, new ClickDatatableTransformer());
     }
 
     /**
@@ -62,6 +42,34 @@ final class ClickController extends Controller
     public function success(Click $click)
     {
         return view('click.success', compact('click'));
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return mixed
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'param1' => 'required',
+            'param2' => 'required',
+        ]);
+
+        $click = Click::firstOrCreate([
+            'ua'     => $request->headers->get('user-agent', ''),
+            'ip'     => $request->ip(),
+            'ref'    => $request->headers->get('referrer', ''),
+            'param1' => $request->get('param1'),
+        ], ['param2' => $request->get('param2')]);
+
+        if ($click->wasRecentlyCreated) {
+            return redirect()->action('ClickController@success', compact('click'));
+        }
+
+        $click->increment('error');
+
+        return redirect()->action('ClickController@error', compact('click'));
     }
 
     /**
