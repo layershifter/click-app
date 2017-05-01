@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
 
 /**
+ * @property string $id
+ * @property mixed  $bad_domain
+ * @property int    $errors
+ * @property string $param1
+ * @property string $param2
+ * @property string $ref
+ * @property string $ua
+ *
  * @method int increment(string $column, int $amount = 1, array $extra = [])
  * @method static Click firstOrCreate(array $fields, array $values = [])
  */
